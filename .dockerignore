@@ -1,0 +1,7 @@
+.git
+.gitignore
+.ipynb_checkpoints
+.venv
+.scrapy
+.vscode
+client_secret.json

@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  chrome:
+    image: selenium/standalone-chrome:4.1.2-20220217
+    container_name: chrome
+    ports:
+      - 4444:4444
+      - 5900:5900
+    volumes:
+      - /dev/shm:/dev/shm
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kurashiru-fav
+    volumes:
+      - ./client_secret.json:/app/client_secret.json:ro
+    env_file:
+      - .env
+    depends_on:
+      - chrome
+    tty: true
+    command: "poetry run python main.py"
+
